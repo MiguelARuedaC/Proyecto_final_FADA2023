@@ -1,15 +1,11 @@
-#from huffman.huffmanbinarytree import HuffmanBinaryTree
- #from huffman.huffmandecoding import HuffmanDecoding
-
 from huffman.arbolbinariohuffman import ArbolBinarioHuffman
 from huffman.DecodificacionHuffman import DecodificacionHuffman
-class HuffmanCoding:
+class CodificacionHuffman:
     """
-    Clase HuffmanCoding
+    Clase CodificacionHUffman
     Esta clase se encarga de codificar un texto en base a un árbol de Huffman
-     Autor: <Leider Santiago Cortés Hernandez
+     Autor: <Leider Santiago Cortés Hernandez - 2159879
             Miguel Angel Rueda Colonia - 2159896>
-    Version: <1>
     """
 
     def __init__(self):
@@ -154,28 +150,12 @@ class HuffmanCoding:
         return max(profundidad_izquierda, profundidad_derecha) + 1
 
 
-# Crear una instancia de HuffmanCoding
-huffman = HuffmanCoding()
+# Crear una instancia de HuffmanCoding:
+huffman = CodificacionHuffman()
 
-# Codificar un texto
-texto_original = """once upon a time, in a quiet little town nestled between hills and a river, lived a kind and gentle artist named leila. she loved to spend her days painting the serene landscapes and the people of her town. leila was well known for her captivating work, and people from far and wide would visit the town just to purchase her paintings.
+# Codificar un texto 1:
 
-one day, as leila was painting the town square, she noticed a young boy standing a few feet away. he watched as leila brush moved across the canvas, capturing the essence of the square. intrigued by the boy fascination, leila invited him to try his hand at painting.
-
-the boy, whose name was eli, was initially hesitant. he confessed that he had never painted before and was afraid he would not be any good at it. leila reassured him, emphasizing that everyone has to start somewhere. she handed him a brush, and with a few strokes, eli began to paint.
-
-days turned into weeks, and weeks into months. leila and eli spent many afternoons together, painting the picturesque town and its lively inhabitants. eli skills improved dramatically, and soon, he was creating art that was just as captivating as leila.
-
-word spread about eli talent, and people flocked to see his work. leila was overjoyed to see eli succeed. she believed in the power of art and its ability to touch peoples hearts. she was pleased to have shared this passion with eli.
-
-however, as years passed, leila grew old and frail. one day, she could not paint anymore. eli was heartbroken. he asked leila what he could do to help. leila, with a soft smile, told him to keep painting and sharing his art with the world.
-
-so, eli did. he continued to paint and tell stories through his work, just as leila had taught him. he carried on her legacy, and the town tradition of art lived on. in a way, leila never truly left. her spirit lived on through eli paintings, in every stroke and splash of color.
-
-in the end, the story of leila and eli is not just about art. it is about mentorship, about passing on ones knowledge and passion to another. it is about leaving a lasting impact on someones life. through her kindness and guidance, leila made a profound impact on eli life. and in return, eli ensured that leila love for art would continue to inspire others, long after she was gone.
-
-"""
-
+texto_original = """murcielago"""
 texto_codificado = huffman.encode(texto_original)
 
 # Imprimir el texto codificado
@@ -208,5 +188,45 @@ print("\nTexto decodificado:", texto_decodificado)
 # Imprimir resumen
 print("\nTabla de resumen:")
 print(tabla_resumen)
+
+#--------------------------------------------------------------------------------------
+#Texto a codificar 2:
+
+texto_original2 = """Hola como estas, soy Miguel"""
+texto_codificado2 = huffman.encode(texto_original2)
+
+# Imprimir el texto codificado
+print("Texto original:", texto_original2)
+print("Texto codificado:", texto_codificado2)
+
+# Obtener el árbol de Huffman, la tabla de codificación y la tabla de resumen
+arbol_huffman2 = huffman.getTree()
+tabla_codificacion2 = huffman.getTable()
+tabla_resumen2 = huffman.getSummary()
+
+101010111100110111101111000001100010101
+1100110111101111000001010011100101
+
+# Imprimir el árbol de Huffman
+print("\nÁrbol de Huffman:")
+arbol_huffman2.traverse()
+
+# Imprimir la tabla de codificación
+print("\nTabla de Codificación:")
+for simbolo, codigo in tabla_codificacion2.items():
+    print(simbolo, ":", codigo)
+
+# Crear una instancia de HuffmanDecoding
+decodificador2 = DecodificacionHuffman()
+
+# Decodificar el texto
+texto_decodificado2 = decodificador2.decode(texto_codificado2, arbol_huffman2)
+
+# Imprimir el texto decodificado
+print("\nTexto decodificado:", texto_decodificado2)
+
+# Imprimir resumen
+print("\nTabla de resumen:")
+print(tabla_resumen2)
 
 

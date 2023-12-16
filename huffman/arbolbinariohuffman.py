@@ -2,7 +2,7 @@ class ArbolBinarioHuffman:
     """
     Clase HuffmanBinaryTree
     Clase que implementa un árbol binario de Huffman
-    Autor: <Leider Santiago Cortés Hernandez
+    Autor: <Leider Santiago Cortés Hernandez - 2159879
             Miguel Angel Rueda Colonia - 2159896>
     """
 
@@ -49,7 +49,7 @@ class ArbolBinarioHuffman:
         """
         if node is not None:
             print(indent + str(node.getNumberKey()))
-            print(indent + "├─ Left:")
+            print(indent + "├─ Izquierda:")
             self._traverse_helper(node.getLeft(), indent + "│  ")
-            print(indent + "└─ Right:")
+            print(indent + "└─ Derecha:")
             self._traverse_helper(node.getRight(), indent + "   ")

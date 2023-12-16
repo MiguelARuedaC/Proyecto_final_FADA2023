@@ -1,10 +1,9 @@
 class DecodificacionHuffman:
     """
-    Clase HuffmanDecoding
+    Clase DecodificaciónHuffman
     Esta clase se encarga de decodificar un texto en base a un árbol de Huffman
-       Autor: <Leider Santiago Cortés Hernandez
+       Autor: <Leider Santiago Cortés Hernandez - 2159879
                 Miguel Angel Rueda Colonia - 2159896>
-    Version: <1>
     """
     def __init__(self):
         pass
