@@ -1,5 +1,6 @@
 from huffman.arbolbinariohuffman import ArbolBinarioHuffman
 from huffman.DecodificacionHuffman import DecodificacionHuffman
+import time
 class CodificacionHuffman:
     """
     Clase CodificacionHUffman
@@ -87,8 +88,6 @@ class CodificacionHuffman:
         total = self.count_characters(self.text)
         total2 = self.count_characters(self.encode(self.text))
 
-        porcentaje_compresion = self.calculate_compression(total, total2)
-
         # Numero de nodos
         total_nodos_huffman = self.contar_nodos_huffman(self.tree)
 
@@ -98,7 +97,6 @@ class CodificacionHuffman:
         # Construcción del resumen:
         summary = f"Total de caracteres: {total}\n"
         summary += f"Total de caracteres binarios: {total2}\n"
-        summary += f"Porcentaje de compresión: {porcentaje_compresion}%\n"
         summary += f"Total de nodos del árbol de Huffman: {total_nodos_huffman}\n"
         summary += f"Profundidad del árbol de Huffman: {profundidad_arbol}\n"
 
@@ -120,20 +118,6 @@ class CodificacionHuffman:
             total_caracteres += 1
         return total_caracteres
 
-    def calculate_compression(self, total_caracteres, total_caracteres_binarios):
-        """
-        Calcula el porcentaje de compresión.
-        :param total_caracteres: número total de caracteres en el texto original
-        :param total_caracteres_binarios: número total de caracteres en el texto codificado
-        :return: porcentaje de compresión
-        """
-        valor1 = total_caracteres
-        valor2 = valor1 * 256
-        valor3 = total_caracteres_binarios
-        Fc = (1 - (valor3 / valor2)) * 100
-        FCR = round(Fc, 4)
-        return FCR
-
     def contar_nodos_huffman(self, nodo):
         if nodo is None:
             return 0
@@ -151,11 +135,12 @@ class CodificacionHuffman:
 
 
 # Crear una instancia de HuffmanCoding:
+
 huffman = CodificacionHuffman()
 
-# Codificar un texto 1:
-
-texto_original = """murcielago"""
+# Codificar texto 1:
+inicio1 =time.time()
+texto_original = """nwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjn"""
 texto_codificado = huffman.encode(texto_original)
 
 # Imprimir el texto codificado
@@ -188,11 +173,56 @@ print("\nTexto decodificado:", texto_decodificado)
 # Imprimir resumen
 print("\nTabla de resumen:")
 print(tabla_resumen)
-
+fin1 = time.time()
+tiempoEjecucion1 = (fin1 - inicio1) * 1000
+print("\nTiempo de ejecucion prueba de 100:")
+print({tiempoEjecucion1})
 #--------------------------------------------------------------------------------------
-#Texto a codificar 2:
+# Codificar texto 2:
+inicio2 =time.time()
+texto_original = """nwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjn"""
+texto_codificado = huffman.encode(texto_original)
 
-texto_original2 = """Hola como estas, soy Miguel"""
+# Imprimir el texto codificado
+print("Texto original:", texto_original)
+print("Texto codificado:", texto_codificado)
+
+# Obtener el árbol de Huffman, la tabla de codificación y la tabla de resumen
+arbol_huffman = huffman.getTree()
+tabla_codificacion = huffman.getTable()
+tabla_resumen = huffman.getSummary()
+
+# Imprimir el árbol de Huffman
+print("\nÁrbol de Huffman:")
+arbol_huffman.traverse()
+
+# Imprimir la tabla de codificación
+print("\nTabla de Codificación:")
+for simbolo, codigo in tabla_codificacion.items():
+    print(simbolo, ":", codigo)
+
+# Crear una instancia de HuffmanDecoding
+decodificador = DecodificacionHuffman()
+
+# Decodificar el texto
+texto_decodificado = decodificador.decode(texto_codificado, arbol_huffman)
+
+# Imprimir el texto decodificado
+print("\nTexto decodificado:", texto_decodificado)
+
+# Imprimir resumen
+print("\nTabla de resumen:")
+print(tabla_resumen)
+fin2 = time.time()
+tiempoEjecucion2 = (fin2 - inicio2) * 1000
+print("\nTiempo de ejecucion prueba de 200:")
+print({tiempoEjecucion2})
+#--------------------------------------------------------------------------------------
+#Texto a codificar de emtrada 500:
+
+inicio3 = time.time()
+
+texto_original2 = """nwdfacijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjxyzs"""
 texto_codificado2 = huffman.encode(texto_original2)
 
 # Imprimir el texto codificado
@@ -203,9 +233,6 @@ print("Texto codificado:", texto_codificado2)
 arbol_huffman2 = huffman.getTree()
 tabla_codificacion2 = huffman.getTable()
 tabla_resumen2 = huffman.getSummary()
-
-101010111100110111101111000001100010101
-1100110111101111000001010011100101
 
 # Imprimir el árbol de Huffman
 print("\nÁrbol de Huffman:")
@@ -228,5 +255,96 @@ print("\nTexto decodificado:", texto_decodificado2)
 # Imprimir resumen
 print("\nTabla de resumen:")
 print(tabla_resumen2)
+
+fin3 = time.time()
+tiempoEjecucion3 = (fin3 - inicio3) * 1000
+print("\nTiempo de ejecucion prueba de 500:")
+print({tiempoEjecucion3})
+#--------------------------------------------------------------------------------------
+#Texto a codificar de emtrada 1000:
+
+inicio4 = time.time()
+
+texto_original2 = """nwdfacijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjxyzsnwdfacijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjxyzs"""
+texto_codificado2 = huffman.encode(texto_original2)
+
+# Imprimir el texto codificado
+print("Texto original:", texto_original2)
+print("Texto codificado:", texto_codificado2)
+
+# Obtener el árbol de Huffman, la tabla de codificación y la tabla de resumen
+arbol_huffman2 = huffman.getTree()
+tabla_codificacion2 = huffman.getTable()
+tabla_resumen2 = huffman.getSummary()
+
+# Imprimir el árbol de Huffman
+print("\nÁrbol de Huffman:")
+arbol_huffman2.traverse()
+
+# Imprimir la tabla de codificación
+print("\nTabla de Codificación:")
+for simbolo, codigo in tabla_codificacion2.items():
+    print(simbolo, ":", codigo)
+
+# Crear una instancia de HuffmanDecoding
+decodificador2 = DecodificacionHuffman()
+
+# Decodificar el texto
+texto_decodificado2 = decodificador2.decode(texto_codificado2, arbol_huffman2)
+
+# Imprimir el texto decodificado
+print("\nTexto decodificado:", texto_decodificado2)
+
+# Imprimir resumen
+print("\nTabla de resumen:")
+print(tabla_resumen2)
+
+fin4 = time.time()
+tiempoEjecucion4 = (fin4 - inicio4) * 1000
+print("\nTiempo de ejecucion prueba de 1000:")
+print({tiempoEjecucion4})
+#--------------------------------------------------------------------------------------
+#Texto a codificar de emtrada 1500:
+
+inicio5 = time.time()
+
+texto_original2 = """nwdfacijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnnwdfacijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjxyzswdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjxyzsnwdfacijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjnwdfcijneiorvbhdsfbevhohfvjfevijndfjinjidfnjivdjfivjdvjidajvjidsfnvjidvijdijndvjidafjivvjdifvjidfvjxyzs"""
+texto_codificado2 = huffman.encode(texto_original2)
+
+# Imprimir el texto codificado
+print("Texto original:", texto_original2)
+print("Texto codificado:", texto_codificado2)
+
+# Obtener el árbol de Huffman, la tabla de codificación y la tabla de resumen
+arbol_huffman2 = huffman.getTree()
+tabla_codificacion2 = huffman.getTable()
+tabla_resumen2 = huffman.getSummary()
+
+# Imprimir el árbol de Huffman
+print("\nÁrbol de Huffman:")
+arbol_huffman2.traverse()
+
+# Imprimir la tabla de codificación
+print("\nTabla de Codificación:")
+for simbolo, codigo in tabla_codificacion2.items():
+    print(simbolo, ":", codigo)
+
+# Crear una instancia de HuffmanDecoding
+decodificador2 = DecodificacionHuffman()
+
+# Decodificar el texto
+texto_decodificado2 = decodificador2.decode(texto_codificado2, arbol_huffman2)
+
+# Imprimir el texto decodificado
+print("\nTexto decodificado:", texto_decodificado2)
+
+# Imprimir resumen
+print("\nTabla de resumen:")
+print(tabla_resumen2)
+
+fin5 = time.time()
+tiempoEjecucion5 = (fin4 - inicio4) * 1000
+print("\nTiempo de ejecucion prueba de 1000:")
+print({tiempoEjecucion5})
 
 

@@ -3,7 +3,7 @@ class ArbolBinarioHuffman:
     Clase HuffmanBinaryTree
     Clase que implementa un árbol binario de Huffman
     Autor: <Leider Santiago Cortés Hernandez - 2159879
-            Miguel Angel Rueda Colonia - 2159896>
+            Miguel Angel Rueda Colonia       - 2159896>
     """
 
     def __init__(self):
